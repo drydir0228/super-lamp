@@ -33,7 +33,7 @@ geox-url:
 proxy-providers:
   baipaovpn:
     type: http
-    url: https://vpnyyds.link/tz
+    url: https://sub.789.st/sub?target=clash&url=https://raw.githubusercontent.com/go4sharing/sub/main/sub.yaml&sort=true&_=1702491263358
     interval: 432000
     path: ./provider201.yaml
     health-check:
