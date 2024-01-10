@@ -1,16 +1,33 @@
-
+###########################################
+#
+# 支持 此订阅 的工具推荐
+#
+# https://wiki.metacubex.one/startup/client/
+#
+###########################################
 
 mixed-port: 7890
-allow-lan: false
+allow-lan: true
+lan-allowed-ips:
+- 0.0.0.0/0
+- ::/0
 mode: rule
 geodata-mode: true
-log-level: info
+log-level: debug
 ipv6: false
 find-process-mode: strict
 global-client-fingerprint: chrome
 geodata-loader: memconservative
 keep-alive-interval: 30
 tcp-concurrent: true
+unified-delay: true
+geo-auto-update: true
+geo-update-interval: 24
+global-ua: clash.meta
+
+profile:
+  store-selected: true
+  store-fake-ip: true
 
 dns:
   enable: true
@@ -31,46 +48,113 @@ geox-url:
   mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
 proxy-providers:
-  baipaovpn:
+  xiaopro:
     type: http
-    url: https://sub.cfno1.eu.org/clash
-    interval: 432000
-    path: ./provider201.yaml
+    url: https://psub.affa21.free.hr/sub?target=clash&url=https%3A%2F%2Fsub.xf.free.hr%2Fapi%2Fsub%3Fhost%3Dworld.kh11a.link%26uuid%3D1ff64191-83b3-410a-86e3-74f721681a80%26format%3Dbase64%26type%3Dvless&insert=false&config=https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2FSleepyHeeead%2Fsubconverter-config%40master%2Fremote-config%2Fspecial%2Fbasic.ini&emoji=true&list=true&tfo=false&scv=true&fdn=false&sort=false&new_name=true
+    interval: 86400
+    path: ./provider200.yaml
     health-check:
       enable: false
       interval: 7200
       url: http://www.gstatic.com/generate_204
 
-  
-
 baidu: &baidu
   type: http
   port: 443
   headers:
-    Host: 153.3.236.22:443
-    X-T5-Auth: 683556433
+    Host: sptest.baidu.com
+    X-T5-Auth: 482857715
     User-Agent: okhttp/3.11.0 Dalvik/2.1.0 (Linux; Build/RKQ1.200826.002) baiduboxapp/11.0.5.12 (Baidu; P1 11)
         
 proxies:
+  - name: Baidu auto
+    server: cloudnproxy.baidu.com
+    <<: *baidu
 
-  - name: 移动
+  - name: 电信 苏州
+    server: 180.97.93.202
+    <<: *baidu
+
+  - name: 电信 广州
+    server: 14.215.179.244
+    <<: *baidu
+
+  - name: 电信 北京1
+    server: 220.181.111.189
+    <<: *baidu
+
+  - name: 电信 北京2
+    server: 220.181.33.174
+    <<: *baidu
+
+  - name: 电信 北京3
+    server: 220.181.7.1
+    <<: *baidu
+
+  - name: 电信 南京1
+    server: 180.101.50.249
+    <<: *baidu
+
+  - name: 电信 南京2
+    server: 180.101.50.208
+    <<: *baidu
+
+  - name: 联通 河北1
+    server: 110.242.70.68
+    <<: *baidu
+
+  - name: 联通 河北2
+    server: 110.242.70.69
+    <<: *baidu
+
+  - name: 联通 南京
+    server: 153.3.237.117
+    <<: *baidu
+
+  - name: 联通 江苏
+    server: 157.0.148.53
+    <<: *baidu
+
+  - name: 联通 广州1
+    server: 157.255.78.51
+    <<: *baidu
+
+  - name: 联通 广州2
+    server: 157.255.72.18
+    <<: *baidu
+
+  - name: 移动 广州
     server: 183.240.98.84
     <<: *baidu
 
-    
+  - name: 移动 南京
+    server: 36.155.169.188
+    <<: *baidu
+
 proxy-groups:
   - name: 🌎 全球节点
     type: select
-    use:
-      - baipaovpn
- 
     proxies:
       - 🚀 百度直连
+      - HK
+      - TW
+      - JP
+      - KR
 
   - name: 🚀 百度直连
     type: select
     proxies:
-      - 移动 
+      - 联通 河北auto
+      - 联通 广州auto
+      - 联通 江苏
+      - 联通 南京
+      - 电信 苏州
+      - 电信 广州
+      - 电信 北京auto
+      - 电信 南京auto
+      - 移动 广州
+      - 移动 南京
+      - Baidu auto
       - 🎯 全球直连
       
   - name: 🎯 全球直连
@@ -89,7 +173,90 @@ proxy-groups:
       - 🚀 百度直连
       - 🌎 全球节点
 
+  - name: "联通 广州auto"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    proxies:
+      - 联通 广州1
+      - 联通 广州2
+    strategy: consistent-hashing
 
+  - name: "联通 河北auto"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    proxies:
+      - 联通 河北1
+      - 联通 河北2
+    strategy: consistent-hashing
+
+  - name: "电信 南京auto"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    proxies:
+      - 电信 南京1
+      - 电信 南京2
+    strategy: consistent-hashing
+
+  - name: "电信 北京auto"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    proxies:
+      - 电信 北京1
+      - 电信 北京2
+      - 电信 北京3
+    strategy: consistent-hashing
+
+  - name: "HK"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)港|hk|hongkong|hong kong"
+    use:
+      - xiaopro
+
+  - name: "JP"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)日|jp|japanese|japan"
+    use:
+      - xiaopro
+
+  - name: "KR"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)韩|kr|South Korea|SouthKorea"
+    use:
+      - xiaopro
+
+  - name: "TW"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)台|tw|taiwanese|taiwan|taiwan strait"
+    use:
+      - xiaopro
 
 rule-providers:
   reject:
@@ -104,7 +271,6 @@ rules:
   # UDP 规则 
   - NETWORK,UDP,🛑 全球拦截
   # 广告过滤
-  - geosite,category-ads-all,🛑 全球拦截
   - RULE-SET,reject,🛑 全球拦截
   # 分流规则
   - DOMAIN-KEYWORD,google,🐟 漏网之鱼
