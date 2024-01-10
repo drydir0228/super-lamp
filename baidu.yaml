@@ -76,6 +76,8 @@ proxy-groups:
       - TW
       - JP
       - KR
+      - SG
+      
 
   - name: 🚀 百度直连
     type: select
@@ -132,6 +134,15 @@ proxy-groups:
     tolerance: 50
     lazy: true
     filter: "(?i)台|tw|taiwanese|taiwan|taiwan strait"
+    use:
+      - xiaopro
+  - name: "SG"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)新|sg|Singapore|狮城"
     use:
       - xiaopro
 
