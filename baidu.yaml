@@ -77,6 +77,7 @@ proxy-groups:
       - JP
       - KR
       - SG
+      - US
       
 
   - name: 🚀 百度直连
@@ -143,6 +144,15 @@ proxy-groups:
     tolerance: 50
     lazy: true
     filter: "(?i)新|sg|Singapore|狮城"
+    use:
+      - xiaopro
+  - name: "US"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)美|us|United States"
     use:
       - xiaopro
 
