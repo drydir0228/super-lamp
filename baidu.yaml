@@ -72,12 +72,12 @@ proxy-groups:
     type: select
     proxies:
       - 🚀 百度直连
-      - HK
-      - TW
-      - JP
-      - KR
-      - SG
-      - US
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🇸🇬 狮城节点
+      - 🇺🇲 美国节点
       
 
   - name: 🚀 百度直连
@@ -98,7 +98,7 @@ proxy-groups:
       - 🌎 全球节点
 
   
-  - name: "HK"
+  - name: "🇭🇰 香港节点"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
@@ -108,7 +108,7 @@ proxy-groups:
     use:
       - xiaopro
 
-  - name: "JP"
+  - name: "🇯🇵 日本节点"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
@@ -118,7 +118,7 @@ proxy-groups:
     use:
       - xiaopro
 
-  - name: "KR"
+  - name: "🇰🇷 韩国节点"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
@@ -128,7 +128,7 @@ proxy-groups:
     use:
       - xiaopro
 
-  - name: "TW"
+  - name: "🇨🇳 台湾节点"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
@@ -137,7 +137,7 @@ proxy-groups:
     filter: "(?i)台|tw|taiwanese|taiwan|taiwan strait"
     use:
       - xiaopro
-  - name: "SG"
+  - name: "🇸🇬 狮城节点"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
@@ -146,7 +146,7 @@ proxy-groups:
     filter: "(?i)新|sg|Singapore|狮城"
     use:
       - xiaopro
-  - name: "US"
+  - name: "🇺🇲 美国节点"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
