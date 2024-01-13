@@ -71,12 +71,9 @@ proxy-groups:
     type: select
     proxies:
       - 移动 
-      - 🎯 全球直连
+ 
       
-  - name: 🎯 全球直连
-    type: select
-    proxies:
-      - DIRECT
+
 
   - name: 🛑 全球拦截
     type: select
