@@ -1,0 +1,177 @@
+
+
+mixed-port: 7890
+allow-lan: true
+lan-allowed-ips:
+- 0.0.0.0/0
+- ::/0
+mode: rule
+geodata-mode: true
+log-level: debug
+ipv6: false
+find-process-mode: strict
+global-client-fingerprint: chrome
+geodata-loader: memconservative
+keep-alive-interval: 30
+tcp-concurrent: true
+unified-delay: true
+geo-auto-update: true
+geo-update-interval: 24
+global-ua: clash.meta
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+dns:
+  enable: true
+  ipv6: false
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 28.0.0.1/8
+  default-nameserver:
+    - https://223.6.6.6/dns-query
+    - https://1.1.1.1/dns-query
+  nameserver:
+    - https://223.6.6.6/dns-query
+    - https://1.1.1.1/dns-query
+
+geox-url:
+  geoip: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+  geosite: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+  mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
+
+proxy-providers:
+  xiaopro:
+    type: http
+    url: https://api.s1.gay/sub?target=clash&url=https%3A%2F%2Ffku-ppg.co.uk%2F&emoji=true
+    interval: 86400
+    path: ./provider200.yaml
+    health-check:
+      enable: false
+      interval: 7200
+      url: http://www.gstatic.com/generate_204
+
+baidu: &baidu
+  type: http
+  port: 443
+  headers:
+    Host: sptest.baidu.com
+    X-T5-Auth: 482857715
+    User-Agent: okhttp/3.11.0 Dalvik/2.1.0 (Linux; Build/RKQ1.200826.002) baiduboxapp/11.0.5.12 (Baidu; P1 11)
+        
+proxies:
+  
+  - name: 移动
+    server: 183.240.98.84
+    <<: *baidu
+
+
+proxy-groups:
+  - name: 🌎 全球节点
+    type: select
+    proxies:
+      - 🚀 百度直连
+      - 🇭🇰 香港节点
+      - 🇨🇳 台湾节点
+      - 🇯🇵 日本节点
+      - 🇰🇷 韩国节点
+      - 🇸🇬 狮城节点
+      - 🇺🇲 美国节点
+      
+
+  - name: 🚀 百度直连
+    type: select
+    proxies:
+      - 移动
+   
+
+  - name: 🛑 全球拦截
+    type: select
+    proxies:
+      - REJECT
+
+  - name: 🐟 漏网之鱼
+    type: relay
+    proxies:
+      - 🚀 百度直连
+      - 🌎 全球节点
+
+  
+  - name: "🇭🇰 香港节点"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)港|hk|hongkong|hong kong"
+    use:
+      - xiaopro
+
+  - name: "🇯🇵 日本节点"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)日|jp|japanese|japan"
+    use:
+      - xiaopro
+
+  - name: "🇰🇷 韩国节点"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)韩|kr|South Korea|SouthKorea"
+    use:
+      - xiaopro
+
+  - name: "🇨🇳 台湾节点"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)台|tw|taiwanese|taiwan|taiwan strait"
+    use:
+      - xiaopro
+  - name: "🇸🇬 狮城节点"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)新|sg|Singapore|狮城"
+    use:
+      - xiaopro
+  - name: "🇺🇲 美国节点"
+    type: url-test
+    url: 'https://www.gstatic.com/generate_204'
+    interval: 300
+    tolerance: 50
+    lazy: true
+    filter: "(?i)美|us|United States"
+    use:
+      - xiaopro
+
+rule-providers:
+  reject:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/reject.txt"
+    path: ./ruleset/reject.yaml
+    interval: 86400
+
+
+rules:
+  # UDP 规则 
+  - NETWORK,UDP,🛑 全球拦截
+  # 广告过滤
+  - RULE-SET,reject,🛑 全球拦截
+  # 分流规则
+  - DOMAIN-KEYWORD,google,🐟 漏网之鱼
+  - GEOSITE,CN,🚀 百度直连
+  - GEOIP,CN,🚀 百度直连
+  - MATCH,🐟 漏网之鱼
