@@ -44,7 +44,7 @@ geox-url:
 proxy-providers:
   xiaopro:
     type: http
-    url: https://api.s1.gay/sub?target=clash&url=https%3A%2F%2Ffku-ppg.co.uk%2F&emoji=true
+    url: https://api.2c.lol/sub?target=clash&url=http%3A%2F%2Fsub.xijingping.gay%2Fapi%2Fsub%3Fhost%3Dworld.kh11a.link%26uuid%3D1ff64191-83b3-410a-86e3-74f721681a80%26format%3Dbase64%26type%3Dvless&insert=false&emoji=true&list=true&tfo=false&scv=true&fdn=false&sort=false&new_name=true
     interval: 86400
     path: ./provider200.yaml
     health-check:
@@ -62,97 +62,97 @@ baidu: &baidu
         
 proxies:
   
-  - name: 移动
+  - name: 绉诲姩
     server: 183.240.98.84
     <<: *baidu
 
 
 proxy-groups:
-  - name: 🌎 全球节点
+  - name: 馃寧 鍏ㄧ悆鑺傜偣
     type: select
     proxies:
-      - 🚀 百度直连
-      - 🇭🇰 香港节点
-      - 🇨🇳 台湾节点
-      - 🇯🇵 日本节点
-      - 🇰🇷 韩国节点
-      - 🇸🇬 狮城节点
-      - 🇺🇲 美国节点
+      - 馃殌 鐧惧害鐩磋繛
+      - 馃嚟馃嚢 棣欐腐鑺傜偣
+      - 馃嚚馃嚦 鍙版咕鑺傜偣
+      - 馃嚡馃嚨 鏃ユ湰鑺傜偣
+      - 馃嚢馃嚪 闊╁浗鑺傜偣
+      - 馃嚫馃嚞 鐙煄鑺傜偣
+      - 馃嚭馃嚥 缇庡浗鑺傜偣
       
 
-  - name: 🚀 百度直连
+  - name: 馃殌 鐧惧害鐩磋繛
     type: select
     proxies:
-      - 移动
+      - 绉诲姩
    
 
-  - name: 🛑 全球拦截
+  - name: 馃洃 鍏ㄧ悆鎷︽埅
     type: select
     proxies:
       - REJECT
 
-  - name: 🐟 漏网之鱼
+  - name: 馃悷 婕忕綉涔嬮奔
     type: relay
     proxies:
-      - 🚀 百度直连
-      - 🌎 全球节点
+      - 馃殌 鐧惧害鐩磋繛
+      - 馃寧 鍏ㄧ悆鑺傜偣
 
   
-  - name: "🇭🇰 香港节点"
+  - name: "馃嚟馃嚢 棣欐腐鑺傜偣"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     tolerance: 50
     lazy: true
-    filter: "(?i)港|hk|hongkong|hong kong"
+    filter: "(?i)娓瘄hk|hongkong|hong kong"
     use:
       - xiaopro
 
-  - name: "🇯🇵 日本节点"
+  - name: "馃嚡馃嚨 鏃ユ湰鑺傜偣"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     tolerance: 50
     lazy: true
-    filter: "(?i)日|jp|japanese|japan"
+    filter: "(?i)鏃jp|japanese|japan"
     use:
       - xiaopro
 
-  - name: "🇰🇷 韩国节点"
+  - name: "馃嚢馃嚪 闊╁浗鑺傜偣"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     tolerance: 50
     lazy: true
-    filter: "(?i)韩|kr|South Korea|SouthKorea"
+    filter: "(?i)闊﹟kr|South Korea|SouthKorea"
     use:
       - xiaopro
 
-  - name: "🇨🇳 台湾节点"
+  - name: "馃嚚馃嚦 鍙版咕鑺傜偣"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     tolerance: 50
     lazy: true
-    filter: "(?i)台|tw|taiwanese|taiwan|taiwan strait"
+    filter: "(?i)鍙皘tw|taiwanese|taiwan|taiwan strait"
     use:
       - xiaopro
-  - name: "🇸🇬 狮城节点"
+  - name: "馃嚫馃嚞 鐙煄鑺傜偣"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     tolerance: 50
     lazy: true
-    filter: "(?i)新|sg|Singapore|狮城"
+    filter: "(?i)鏂皘sg|Singapore|鐙煄"
     use:
       - xiaopro
-  - name: "🇺🇲 美国节点"
+  - name: "馃嚭馃嚥 缇庡浗鑺傜偣"
     type: url-test
     url: 'https://www.gstatic.com/generate_204'
     interval: 300
     tolerance: 50
     lazy: true
-    filter: "(?i)美|us|United States"
+    filter: "(?i)缇巪us|United States"
     use:
       - xiaopro
 
@@ -166,12 +166,12 @@ rule-providers:
 
 
 rules:
-  # UDP 规则 
-  - NETWORK,UDP,🛑 全球拦截
-  # 广告过滤
-  - RULE-SET,reject,🛑 全球拦截
-  # 分流规则
-  - DOMAIN-KEYWORD,google,🐟 漏网之鱼
-  - GEOSITE,CN,🚀 百度直连
-  - GEOIP,CN,🚀 百度直连
-  - MATCH,🐟 漏网之鱼
+  # UDP 瑙勫垯 
+  - NETWORK,UDP,馃洃 鍏ㄧ悆鎷︽埅
+  # 骞垮憡杩囨护
+  - RULE-SET,reject,馃洃 鍏ㄧ悆鎷︽埅
+  # 鍒嗘祦瑙勫垯
+  - DOMAIN-KEYWORD,google,馃悷 婕忕綉涔嬮奔
+  - GEOSITE,CN,馃殌 鐧惧害鐩磋繛
+  - GEOIP,CN,馃殌 鐧惧害鐩磋繛
+  - MATCH,馃悷 婕忕綉涔嬮奔
