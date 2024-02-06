@@ -59,7 +59,7 @@ proxies:
 
     
 proxy-groups:
-  - name: 🌎 全球节点
+  - name: 🌎 节点
     type: select
     use:
       - vpn
@@ -71,23 +71,19 @@ proxy-groups:
     type: select
     proxies:
       - 移动 
-      - 🎯 全球直连
       
-  - name: 🎯 全球直连
-    type: select
-    proxies:
-      - DIRECT
 
-  - name: 🛑 全球拦截
+
+  - name: 🛑 拦截
     type: select
     proxies:
       - REJECT
 
-  - name: 🐟 漏网之鱼
+  - name: 🐟 其他
     type: relay
     proxies:
       - 🚀 百度
-      - 🌎 全球节点
+      - 🌎 节点
 
 
 
@@ -102,12 +98,12 @@ rule-providers:
 
 rules:
   # UDP 规则 
-  - NETWORK,UDP,🛑 全球拦截
+  - NETWORK,UDP,🛑 拦截
   # 广告过滤
-  - geosite,category-ads-all,🛑 全球拦截
-  - RULE-SET,reject,🛑 全球拦截
+  - geosite,category-ads-all,🛑 拦截
+  - RULE-SET,reject,🛑 拦截
   # 分流规则
-  - DOMAIN-KEYWORD,google,🐟 漏网之鱼
+  - DOMAIN-KEYWORD,google,🐟 其他
   - GEOSITE,CN,🚀 百度
   - GEOIP,CN,🚀 百度
-  - MATCH,🐟 漏网之鱼
+  - MATCH,🐟 其他
