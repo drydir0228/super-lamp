@@ -53,7 +53,7 @@ baidu: &baidu
         
 proxies:
 
-  - name: 移动
+  - name: 🚀 移动免流
     server: 183.240.98.84
     <<: *baidu
 
@@ -65,12 +65,12 @@ proxy-groups:
       - ppg
  
     proxies:
-      - 🚀 百度
+      - 🚀 移动百度
 
-  - name: 🚀 百度
+  - name: 🚀 移动百度
     type: select
     proxies:
-      - 移动 
+      - 🚀 移动免流 
       - 🎯 全球直连
       
   - name: 🎯 全球直连
@@ -86,7 +86,7 @@ proxy-groups:
   - name: 🐟 漏网之鱼
     type: relay
     proxies:
-      - 🚀 百度
+      - 🚀 移动百度
       - 🌎 全球节点
 
 
@@ -108,6 +108,6 @@ rules:
   - RULE-SET,reject,🛑 全球拦截
   # 分流规则
   - DOMAIN-KEYWORD,google,🐟 漏网之鱼
-  - GEOSITE,CN,🚀 百度
-  - GEOIP,CN,🚀 百度
+  - GEOSITE,CN,🚀 移动百度
+  - GEOIP,CN,🚀 移动百度
   - MATCH,🐟 漏网之鱼
