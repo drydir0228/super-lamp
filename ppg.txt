@@ -53,7 +53,7 @@ baidu: &baidu
         
 proxies:
 
-  - name: 🚀 移动百度
+  - name: 🇨🇳 移动百度
     server: 183.240.98.84
     <<: *baidu
 
@@ -70,7 +70,7 @@ proxy-groups:
   - name: 🚀 国内免流
     type: select
     proxies:
-      - 🚀 移动百度
+      - 🇨🇳 移动百度
       
       
 
