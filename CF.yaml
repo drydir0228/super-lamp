@@ -31,9 +31,9 @@ geox-url:
   mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
 proxy-providers:
-  vpn:
+  HappyHour:
     type: http
-    url: https://s.1g.gay/HzY4F8
+    url: https://s.1g.gay/kDtbCE
     interval: 432000
     path: ./provider201.yaml
     health-check:
@@ -53,37 +53,36 @@ baidu: &baidu
         
 proxies:
 
-  - name: 移动
+  - name: 🇨🇳 移动百度
     server: 183.240.98.84
     <<: *baidu
 
     
 proxy-groups:
-  - name: 🌎 节点
+  - name: 🌎 国外免流
     type: select
     use:
-      - vpn
+      - HappyHour
  
-    proxies:
-      - 🚀 百度
+    
 
-  - name: 🚀 百度
+  - name: 🚀 国内免流
     type: select
     proxies:
-      - 移动 
+      - 🇨🇳 移动百度
+      
       
 
-
-  - name: 🛑 拦截
+  - name: 🛑 全球拦截
     type: select
     proxies:
       - REJECT
 
-  - name: 🐟 其他
+  - name: 🐟 漏网之鱼
     type: relay
     proxies:
-      - 🚀 百度
-      - 🌎 节点
+      - 🚀 国内免流
+      - 🌎 国外免流
 
 
 
@@ -98,12 +97,12 @@ rule-providers:
 
 rules:
   # UDP 规则 
-  - NETWORK,UDP,🛑 拦截
+  - NETWORK,UDP,🛑 全球拦截
   # 广告过滤
-  - geosite,category-ads-all,🛑 拦截
-  - RULE-SET,reject,🛑 拦截
+  - geosite,category-ads-all,🛑 全球拦截
+  - RULE-SET,reject,🛑 全球拦截
   # 分流规则
-  - DOMAIN-KEYWORD,google,🐟 其他
-  - GEOSITE,CN,🚀 百度
-  - GEOIP,CN,🚀 百度
-  - MATCH,🐟 其他
+  - DOMAIN-KEYWORD,google,🐟 漏网之鱼
+  - GEOSITE,CN,🚀 国内免流
+  - GEOIP,CN,🚀 国内免流
+  - MATCH,🐟 漏网之鱼
