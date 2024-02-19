@@ -64,8 +64,7 @@ proxy-groups:
     use:
       - ppg
  
-    proxies:
-      - 🚀 国内免流
+    
 
   - name: 🚀 国内免流
     type: select
