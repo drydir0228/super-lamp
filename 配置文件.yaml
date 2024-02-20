@@ -31,9 +31,9 @@ geox-url:
   mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
 proxy-providers:
-  ED:
+  github:
     type: http
-    url: https://s.1g.gay/kDtbCE
+    url: https://s.1g.gay/dHby7p
     interval: 432000
     path: ./provider201.yaml
     health-check:
@@ -53,30 +53,25 @@ baidu: &baidu
         
 proxies:
 
-  - name: 移动
+  - name: 🇨🇳 移动百度
     server: 183.240.98.84
     <<: *baidu
 
     
 proxy-groups:
-  - name: 🌎 全球节点
+  - name: 🌎 国外免流
     type: select
     use:
-      - ED
+      - github
  
-    proxies:
-      - 🚀 百度直连
+    
 
-  - name: 🚀 百度直连
+  - name: 🚀 国内免流
     type: select
     proxies:
-      - 移动 
-      - 🎯 全球直连
+      - 🇨🇳 移动百度
       
-  - name: 🎯 全球直连
-    type: select
-    proxies:
-      - DIRECT
+      
 
   - name: 🛑 全球拦截
     type: select
@@ -86,8 +81,8 @@ proxy-groups:
   - name: 🐟 漏网之鱼
     type: relay
     proxies:
-      - 🚀 百度直连
-      - 🌎 全球节点
+      - 🚀 国内免流
+      - 🌎 国外免流
 
 
 
@@ -108,6 +103,6 @@ rules:
   - RULE-SET,reject,🛑 全球拦截
   # 分流规则
   - DOMAIN-KEYWORD,google,🐟 漏网之鱼
-  - GEOSITE,CN,🚀 百度直连
-  - GEOIP,CN,🚀 百度直连
+  - GEOSITE,CN,🚀 国内免流
+  - GEOIP,CN,🚀 国内免流
   - MATCH,🐟 漏网之鱼
