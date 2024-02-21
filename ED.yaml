@@ -53,7 +53,7 @@ baidu: &baidu
         
 proxies:
 
-  - name: 🇨🇳 中国移动
+  - name: 🇨🇳 广州移动
     server: 183.240.98.84
     <<: *baidu
 
@@ -69,7 +69,7 @@ proxy-groups:
   - name: 🚀 国内免流
     type: select
     proxies:
-      - 🇨🇳 中国移动 
+      - 🇨🇳 广州移动
       
       
 
