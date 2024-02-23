@@ -33,7 +33,7 @@ geox-url:
 proxy-providers:
   HappyHour:
     type: http
-    url: https://s.1g.gay/kDtbCE
+    url: https://s.1g.gay/HzY4F8
     interval: 432000
     path: ./provider201.yaml
     health-check:
