@@ -71,8 +71,9 @@ proxy-groups:
   - name: 🌎 国外免流
     type: select
     use:
-      - ED
       – github
+      - ED
+      
     
 
   - name: 🚀 国内免流
