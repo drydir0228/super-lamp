@@ -31,15 +31,7 @@ geox-url:
   mmdb: "https://fastly.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.metadb"
 
 proxy-providers:
-  github:
-    type: http
-    url: https://s.1g.gay/dHby7p
-    interval: 432000
-    path: ./provider201.yaml
-    health-check:
-      enable: false
-      interval: 7200
-      url: http://www.gstatic.com/generate_204
+ use:
   ED:
     type: http
     url: https://s.1g.gay/kDtbCE
@@ -70,8 +62,6 @@ proxies:
 proxy-groups:
   - name: 🌎 国外免流
     type: select
-    use:
-      – github
     use: 
       - ED
       
