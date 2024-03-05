@@ -1,4 +1,4 @@
 baidu: &baidu {type: http, port: 443, headers: {X-T5-Auth: "683556433",Host: "153.3.236.22"}}
 
 proxies:
-  - {name: 广州移动, server: 183.240.98.84, <<: *baidu}
+  - {name: 移动百度, server: 183.240.98.84, <<: *baidu}
